@@ -1,23 +1,24 @@
-!/user/bin/env/bash
-File: guessinggame.sh
-ls
-echo "stars the program"
-if [[ $1 -eq 4 ]]
-then
-  echo "congrats you are enter correct number"
-else
-  echo "You entered: $1, not what I was looking for, please enter a correct no."
-fi
+#!/usr/bin/env bash
+# File: guessinggame.sh
 
-function guessinggame {
-  local sum=0
-
-  for element in $@
-  do
-    let sum=sum+$element
-  done
-
-  echo $sum
-  echo "you are in the cuurect working directory"
+function guessinggame(){
+    no_of_files=$(pwd | ls | wc -l)
+    while true;
+    do
+        echo "pleas enter your guess"
+        read  number
+        if [ $number -lt $no_of_files ]
+        then
+            echo "Your guess is less than the number of files"
+        elif [ $number -gt $no_of_files ]
+        then
+            echo "Your guess is greater than the number of files"
+        else
+            echo "Congratulation,your guess is correct!"
+        break;
+        fi
+    done
 }
-Echo "end of the program"
+
+echo "Guess how many files are there in current directory?"
+guessinggame
